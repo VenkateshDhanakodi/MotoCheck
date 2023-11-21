@@ -59,9 +59,11 @@ const signIn = async(req, res)=>{
                     message: "Invalid Credentials"
                 })
             }else{
-                let token = await createToken({userName:oldUser.userName, email: oldUser.email, id:oldUser._id, mobile:oldUser.mobile});
+                let userData = {userName:oldUser.userName, email: oldUser.email, id:oldUser._id, mobile:oldUser.mobile}
+                let token = await createToken(userData);
                 res.status(200).send({
                     message: "Login successfull",
+                    user: userData,
                     token
                 })
             }
@@ -86,7 +88,8 @@ const resetPasswordEmail = async (user_mail, resetToken) => {
     });
 
     // Constructing the reset link
-    const resetLink = `http://localhost:3377/api/resetPassword/${resetToken}`;
+    // const resetLink = `http://localhost:3377/api/resetPassword/${resetToken}`;
+    const resetLink = `http://localhost:3000/reset-password/routing/${resetToken}`;
 
     // Email content
     const mailOptions = {
@@ -149,7 +152,7 @@ const resetPassword = async(req, res)=>{
         }
         let passwordUpdate = await userModel.findOne({token});
         if(passwordUpdate){
-            const  newPass = await hashPassword(newPassword)
+            const newPass = await hashPassword(newPassword)
             passwordUpdate.password = newPass;
             passwordUpdate.token = undefined;
             await passwordUpdate.save();

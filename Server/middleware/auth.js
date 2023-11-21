@@ -20,6 +20,7 @@ const createToken = async({userName, id, email, mobile})=>{
 
 const validate = async (req, res, next) => {
     try {
+        console.log(req.headers.authorization);
         req.token = req.headers.authorization.split(" ")[1];
         jwt.verify(req.token, secretKey, (err, decoded) => {
             if (err) {

@@ -1,0 +1,10 @@
+  "email": "john.doe@example.com",
+  "password": "secure_password"
+
+Personal Token for gitHub -
+
+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
+
+Amazon-
+dnshvenkat@gmail.com
+AATAVPMVTTV@amazon

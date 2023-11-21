@@ -4,5 +4,6 @@ const serviceController = require('../controllers/serviceController.js');
 
 //get
 router.get('/', serviceController.getService);
+router.get('/:name', serviceController.coveredServices);
 
 module.exports = router;

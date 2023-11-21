@@ -10,6 +10,8 @@ var usersRouter = require('./routes/users');
 var bookingsRouter = require('./routes/bookings');
 var servicesRouter = require('./routes/services'); 
 var signUpSignInRouter = require('./routes/signUpSignIn'); 
+var motorCyclesRouter = require('./routes/motorCycles'); 
+var paymentRouter = require('./routes/payment'); 
 
 var app = express();
 
@@ -18,13 +20,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(cors())
+app.use(cors());
 
 app.use('/', indexRouter);
 app.use('/user', usersRouter);
 app.use('/booking', bookingsRouter);
 app.use('/service', servicesRouter);
 app.use('/api', signUpSignInRouter);
+app.use('/motorCycles', motorCyclesRouter);
+app.use('/payment', paymentRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
